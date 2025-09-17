@@ -1,8 +1,11 @@
 import 'bulma/css/bulma.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './App.scss';
-import { Link, Outlet } from 'react-router-dom';
+import classNames from 'classnames';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 export const App = () => {
+  const location = useLocation();
+
   return (
     <>
       {/* Also requires <html class="has-navbar-fixed-top"> */}
@@ -12,10 +15,20 @@ export const App = () => {
       >
         <div className="container">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item is-active">
+            <Link
+              to="/"
+              className={classNames('navbar-item', {
+                'is-active': location.pathname === '/',
+              })}
+            >
               Home
             </Link>
-            <Link to="/tabs" className="navbar-item">
+            <Link
+              to="/tabs"
+              className={classNames('navbar-item', {
+                'is-active': location.pathname.startsWith('/tabs'),
+              })}
+            >
               Tabs
             </Link>
           </div>
